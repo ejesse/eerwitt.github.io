@@ -11,6 +11,8 @@
 #   - dist/**/*.js
 #
 src_files:
+    - javascripts/thirdparty/jquery*.js
+    - javascripts/thirdparty/handlebars*.js
     - javascripts/**/*.js
 
 # stylesheets
