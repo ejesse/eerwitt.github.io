@@ -9,6 +9,7 @@
     <script src='./javascripts/thirdparty/handlebars-1.0.rc.1.js' type='text/javascript'></script>
     <script src='./javascripts/thirdparty/ember-1.0.pre.js' type='text/javascript'></script>
     <script src='./javascripts/thirdparty/ember-data.js' type='text/javascript'></script>
+    <script src='./javascripts/main.js' type='text/javascript'></script>
     <title>Erik Erwitt</title>
     <script type='text/javascript'>
       //<![CDATA[
@@ -25,23 +26,28 @@
     </script>
   </head>
   <body>
-    <header>
+    <script data-template-name='layout' type='text/x-handlebars'>
+      <header>
+        <div class='container'>
+          <h1>Erik Erwitt</h1>
+          {{yield}}
+          <section id='downloads'>
+            <a class='btn btn-github' href='https://github.com/eerwitt'>
+              <span class='icon'></span>
+              View on GitHub
+            </a>
+          </section>
+        </div>
+      </header>
       <div class='container'>
-        <h1>Erik Erwitt</h1>
-        <h2>A website for viewing information over the internet.</h2>
-        <section id='downloads'>
-          <a class='btn btn-github' href='https://github.com/eerwitt'>
-            <span class='icon'></span>
-            View on GitHub
-          </a>
+        <section id='main_content'>
+          <h3>Erik Erwitt</h3>
+          <p>Is here.</p>
         </section>
       </div>
-    </header>
-    <div class='container'>
-      <section id='main_content'>
-        <h3>Erik Erwitt</h3>
-        <p>Is here.</p>
-      </section>
-    </div>
+    </script>
+    <script data-template-name='application' type='text/x-handlebars'>
+      <h2>A website for viewing information over the internet.</h2>
+    </script>
   </body>
 </html>
