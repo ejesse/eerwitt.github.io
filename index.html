@@ -9,7 +9,9 @@
     <script src='./javascripts/thirdparty/handlebars-1.0.rc.1.js' type='text/javascript'></script>
     <script src='./javascripts/thirdparty/ember-1.0.pre.js' type='text/javascript'></script>
     <script src='./javascripts/thirdparty/ember-data.js' type='text/javascript'></script>
-    <script src='./javascripts/app/main.js' type='text/javascript'></script>
+    <script src='./javascripts/app/application.js' type='text/javascript'></script>
+    <script src='./javascripts/app/prior_work.js' type='text/javascript'></script>
+    <script src='./javascripts/app/router.js' type='text/javascript'></script>
     <title>Erik Erwitt</title>
     <script type='text/javascript'>
       //<![CDATA[
@@ -48,6 +50,18 @@
     </script>
     <script data-template-name='application' type='text/x-handlebars'>
       <h2>A website for viewing information over the internet.</h2>
+      <a {{action showPriorWorks href=true}}>Prior Works</a>
+      {{outlet}}
+    </script>
+    <script data-template-name='priorWorks' type='text/x-handlebars'>
+      <h2>Prior Work</h2>
+      {{#each priorWork in controller}}
+      <h2>{{priorWork.title}}</h2>
+      {{outlet}}
+      {{/each}}
+    </script>
+    <script data-template-name='priorWork' type='text/x-handlebars'>
+      <p>{{priorWork.description}}</p>
     </script>
   </body>
 </html>
