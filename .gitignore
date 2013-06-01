@@ -2,3 +2,4 @@
 *.log
 *.swp
 js/*.js
+_site
