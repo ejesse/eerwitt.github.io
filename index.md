@@ -9,3 +9,5 @@ title: Home
 </h3>
 
 <p>Is here.</p>
+
+![I have no idea what I am doing here]({{site.url}}/images/i_have_no_idea.jpg "I have no idea what I am doing here")
