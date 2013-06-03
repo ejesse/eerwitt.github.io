@@ -1,2 +1,5 @@
 name: Focus 
 pygments: true
+lsi: true
+future: false
+show_drafts: false
