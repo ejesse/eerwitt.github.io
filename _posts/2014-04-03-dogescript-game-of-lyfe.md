@@ -7,7 +7,7 @@ title: dogescript game of lyfe
 
 Above is a dogescript version of Conway's Game of Life. Simple and based on [Mfoo's work](https://github.com/mfoo/CoffeeScript-Game-Of-Life). It is pretty basic but fun to write in doge.
 
-This is the dogescript which made it, or look [dogescript lyfe](https://github.com/eerwitt/conways-game-of-lyfe).
+This is the dogescript which made it, or look [dogescript lyfe](https://github.com/eerwitt/doge-game-of-life).
 
 {% highlight ruby %}
 quiet
