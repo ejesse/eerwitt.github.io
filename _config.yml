@@ -4,3 +4,4 @@ highlighter: pygments
 lsi: true
 future: false
 show_drafts: false
+markdown: kramdown
