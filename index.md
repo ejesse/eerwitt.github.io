@@ -4,6 +4,7 @@ title: (e3) Homepage
 ---
 
 {% for post in site.posts %}
-  {{ post.content }}
+{% if post.featured %}
+{{ post.content }}
+{% endif %}
 {% endfor %}
-

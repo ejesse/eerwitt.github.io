@@ -1,13 +1,30 @@
 ---
 layout: default
-title: dogescript game of lyfe
+title: dogescript game of life
+featured: true
 ---
 
-## dogescript game of lyfe
+<p>A dogescript version of Conway's Game of Life. Based on <a href="https://github.com/mfoo/CoffeeScript-Game-Of-Life" title="Mfoo's Work">Mfoo's work</a>. It is pretty basic but fun to write in doge.</p>
 
-Above is a dogescript version of Conway's Game of Life. Simple and based on [Mfoo's work](https://github.com/mfoo/CoffeeScript-Game-Of-Life). It is pretty basic but fun to write in doge.
+<p>This is the dogescript which made it, or look <a href="https://github.com/eerwitt/doge-game-of-life" title="dogescript life">dogescript life</a>.</p>
 
-This is the dogescript which made it, or look [dogescript lyfe](https://github.com/eerwitt/doge-game-of-life).
+<div><canvas id="conway" width="680" height="510" style="border: 1px solid black;background:url(images/doge.jpg);"></canvas></div>
+
+<p>Iteration: <span id="iterationNumber">0</span></p>
+<p>
+    <button id="play">Play</button>
+    <button id="stepper">Step</button>
+    <button id="pause">Pause</button>
+    <button id="randomise">Randomise</button>
+</p>
+<p>Click a cell on the map to manually toggle it.</p>
+
+<script type="text/javascript">
+  document.write(unescape("%3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+  document.write(unescape("%3Cscript src='javascripts/conway.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<h2 id='dogescript_game_of_lyfe'>dogescript game of lyfe</h2>
 
 {% highlight ruby %}
 quiet
