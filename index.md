@@ -1,6 +1,6 @@
 ---
 layout: default
-title: (e3) Homepage
+title: (e3) Home
 ---
 
 {% for post in site.posts %}
