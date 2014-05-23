@@ -1,5 +1,4 @@
 name: Focus 
-pygments: true
 highlighter: pygments
 lsi: true
 future: false
