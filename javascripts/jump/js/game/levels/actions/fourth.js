@@ -23,7 +23,7 @@
     greenBlock = Bodies.rectangle(greenBlockPosition.x, greenBlockPosition.y, 51, 51, {
       isStatic: true,
       render: {
-        spriteSheet: "/Images/jump/img/kenny/Enemies/enemies_spritesheet.png",
+        spriteSheet: "/images/jump/img/kenny/Enemies/enemies_spritesheet.png",
         tile: {
           rotation: 0
         },
@@ -44,7 +44,7 @@
         _results.push(Bodies.rectangle(position.x, position.y, 70, 70, {
           isStatic: true,
           render: {
-            spriteSheet: "/Images/jump/img/kenny/Tiles/tiles_spritesheet.png",
+            spriteSheet: "/images/jump/img/kenny/Tiles/tiles_spritesheet.png",
             tile: {
               rotation: 0
             },
