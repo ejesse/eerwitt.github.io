@@ -67,7 +67,7 @@
 
   window.updateScore = function(playerAScore, playerBScore) {
     var displayScore, playerAOffset, playerBOffset, spriteSheet;
-    spriteSheet = "/Images/jump/img/kenny/HUD/hud_spritesheet.png";
+    spriteSheet = "/images/jump/img/kenny/HUD/hud_spritesheet.png";
     window.scenery = window.scenery.filter(function(scenery) {
       return scenery.label !== "Score";
     });
