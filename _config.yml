@@ -4,7 +4,7 @@ lsi: true
 highlighter: pygments
 permalink: pretty
 title: Erik Erwitt
-description: '“I have traveled the length and breadth of this country and talked with the best people, and I can assure you that data processing is a fad that will not last out the year.” Business books editor Prentice Hall, 1957.'
+description: I enjoy exploring the world while writing software.
 tagline: Software Engineer
 url: http://eerwitt.github.io
 baseurl: /

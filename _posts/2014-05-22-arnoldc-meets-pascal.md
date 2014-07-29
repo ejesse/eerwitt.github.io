@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: .ArnoldC meets Pascal
 excerpt: Pascal's Triangle in ArnoldC, proof functional languages are the future.
 ---
