@@ -1,6 +1,18 @@
-name: Focus 
-highlighter: pygments
-lsi: true
-future: false
 show_drafts: false
+future: false
+lsi: true
+highlighter: pygments
+permalink: pretty
+title: Erik Erwitt
+description: '“I have traveled the length and breadth of this country and talked with the best people, and I can assure you that data processing is a fad that will not last out the year.” Business books editor Prentice Hall, 1957.'
+tagline: Software Engineer
+url: http://eerwitt.github.io
+baseurl: /
+author:
+  name: e3
+  url: https://twitter.com/legoscript
+paginate: 5
+version: 2.1.0
+github:
+  repo: https://github.com/eerwitt
 markdown: kramdown
