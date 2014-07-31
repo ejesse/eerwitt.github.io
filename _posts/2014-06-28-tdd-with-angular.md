@@ -1,7 +1,10 @@
 ---
 layout: post
 title: .tdd with angular
+description: A quick look at setting up a painless testing process using Angular.js.
+image: https://angularjs.org/img/AngularJS-large.png
 ---
+
 
 # Introduction
 I find it difficult to use TDD methodology while creating browser based applications. In Rails there are many options but the basis of a Rails application is different than an application where the majority of the logic is in the browser. With Rails I have a single request and response for the majority of use cases whereas using a client side Javascript framework gives me the freedom to have pages updated without refreshing the browser.

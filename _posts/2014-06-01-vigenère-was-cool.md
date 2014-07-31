@@ -1,6 +1,8 @@
 ---
 layout: post
 title: .vigenère was cool
+description: A coffeescript implementation of an old and interesting cipher.
+image: http://upload.wikimedia.org/wikipedia/commons/1/1a/Vigenere.jpg
 ---
 
 Well... Actually [Giovan Battista Bellaso](http://en.wikipedia.org/wiki/Giovan_Battista_Bellaso) was cool because he invented the [Vigenère cipher](http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) but wasn't credited for his discovery by many. All around Bellaso seems to be a fairly talented person (Vigenère too) but one day he devised a method to encipher a message which was quite successful.

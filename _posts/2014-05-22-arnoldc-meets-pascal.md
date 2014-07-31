@@ -1,7 +1,8 @@
 ---
 layout: post
 title: .ArnoldC meets Pascal
-excerpt: Pascal's Triangle in ArnoldC, proof functional languages are the future.
+description: Pascal's Triangle in ArnoldC, proof functional languages are the future.
+image: https://raw.githubusercontent.com/eerwitt/ArnoldPascal/master/arnold-pascal.png
 ---
 
 
@@ -17,3 +18,4 @@ Without any commercial breaks, here is Pascal's Triangle in ArnoldC.
 {% endhighlight %}
 
 "GET TO THE CHOPPER ROWNUM" -- That Code
+
