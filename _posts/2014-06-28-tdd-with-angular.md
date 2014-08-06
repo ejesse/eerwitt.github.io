@@ -2,7 +2,7 @@
 layout: post
 title: .tdd with angular
 description: A quick look at setting up a painless testing process using Angular.js.
-image: https://angularjs.org/img/AngularJS-large.png
+image: /images/angularjs-large.png
 ---
 
 

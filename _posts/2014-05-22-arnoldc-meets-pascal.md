@@ -2,7 +2,7 @@
 layout: post
 title: .ArnoldC meets Pascal
 description: Pascal's Triangle in ArnoldC, proof functional languages are the future.
-image: https://raw.githubusercontent.com/eerwitt/ArnoldPascal/master/arnold-pascal.png
+image: /images/arnold-pascal.png
 ---
 
 
