@@ -1,0 +1,123 @@
+---
+layout: post
+title: .velato-js
+description: A transpiler to turn Velato code into JavaScript.
+image: /images/velato.jpg
+---
+
+<script type="text/javascript">
+  //<![CDATA[
+  document.write(unescape("%3Cscript src='/javascripts/velato.js' type='text/javascript'%3E%3C/script%3E"));
+  //]]>
+</script>
+
+<script type="text/javascript">
+  Velato.output = function(input) {
+    $("#velato-output").text(input);
+  }
+
+  Velato.parseTab = function(tabs) {
+    var allNotes = [];
+
+    tabs.map(function(tab) {
+      return tab.notes;
+    }).forEach(function(tabNotes, i) {
+      tabNotes.forEach(function(tabNote) {
+        if(tabNote.chord !== undefined) {
+          tabNote.chord.forEach( function(chordNote) {
+            allNotes.push(chordNote.abc);
+          });
+        } else {
+          allNotes.push(tabNote.abc);
+        }
+      });
+    });
+
+    var parsedNotes = allNotes.filter(function(n) { return n !== undefined }).map(function(n) { return [n.key,n.accidental].join("") }).join(" ");
+    $("#parsed-velato").text(parsedNotes);
+
+    try {
+      var transpiledJS = Velato.compileJS(parsedNotes);
+      eval(transpiledJS);
+    } catch(e) {
+      Velato.output(e.message);
+    }
+  }
+</script>
+
+<p>Velato is an esoteric programming language based on principles of music theory. I wasn't able to use the .NET compiler to try out the language so I made velato.js, a transpiler which takes in Velato code and spits out JavaScript. In the process I learned a bit about transpilers and language design.</p>
+
+<h2>.try programming velato</h2>
+
+<p>The editor below takes input as VexTab notation and executes the notes using velato.js, the output is shown below the editor.
+  <ul>
+    <li><a href="http://danieltemkin.com/Velato#commandList">Velato Syntax</a></li>
+    <li><a href="http://www.vexflow.com/vextab/tutorial.html">VexTab Syntax</a></li>
+  </ul>
+</p>
+
+<div class="vex-tabdiv"
+  width=700 scale=1.0 editor="true"
+  editor_width=720 editor_height=180>tabstave notation=true tablature=false
+notes (C/4.A/4.G/4) E-E#-A/4
+
+notes (D#/4.G/4)
+</div>
+
+<h2>.parsed velato</h2>
+<p id="parsed-velato"></p>
+
+<h2>.velato output</h2>
+<p id="velato-output"></p>
+
+<h2>.building my first transpiler</h2>
+
+<p>At first I thought building something which could execute the code of an esoteric language would be a fun waste of time and I was correct. The odd thing is that after building a transpiler for Velato to JavaScript I learned valuable skills I can use in my work. For instance, I learned how trivial it is to build my own language on top of JavaScript which is something I thought was impossible. After a few experiences with Jison I figured I could never make something which parses a custom language and generates JavaScript.</p>
+
+<p>I think that building velato.js enlightened me on language features which I have never considered before. In Velato, there is an idea of changing the root note which in turn changes how notes are parsed. For example, the command to print might be {% highlight ruby %}C A G{% endhighlight %} in the root of C but if I change the root note to be F then the command becomes:{% highlight ruby %}F D C{% endhighlight %}</p>
+
+<p>A language where every line might change the meaning of the next line is a concept which I had never imagined in programming. Sure, a variable might change what it points to but the actual syntax of the code I write changing as the program is written is a novel idea to me. It can be useful in how the context of a command might change the actual syntax of that command.</p>
+
+<h2>.how velato-js works</h2>
+
+<p>Overview:
+  <ol>
+    <li>Raw Velato code is input <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L601">"C A G"</a></li>
+    <li>String is tokenized to individual characters <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/lexer.coffee#L2">["C", "A", "G"]</a></li>
+    <li>Characters are matched against either a <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L429">command or an expression</a></li>
+    <li>The matched command or expression is buffered as the <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L100">next match</a></li>
+    <li>The match is converted to an <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L440">AST element</a></li>
+    <li>The AST is sent to <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L601">escodegen</a></li>
+    <li>escodegen returns a string containing <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L600">executable javascript</a></li>
+  </ol>
+</p>
+
+<p>The process starts by using a Lexer to split up the input string. The Lexer is responsible for turning strings of notes into tokens. Each token is a set of notes which makes up a command or expression. A token will record the current root note, the matched note and the location of the note in the string.</p>
+
+<p>When the Lexer returns a statement (Velato command or expression) the parser attempts to find a parselet which is responsible for a statement of that name. If a statement is found then the statement tries to parse the next statement, this is where the recursion begins matching the rest of the language. As long as each token matches to a statement then the process continues until the end of the source file.</p>
+
+<p>The statemnts being matched are returned as Abstract Syntax Tree nodes (AST nodes). I used the Spider Monkey Parser API AST node syntax as the representation for each statment. At this point the entire AST can be viewed to check for operator precedence. I used the escodegen demo to compare the AST generated with the one generated using plain JavaScript.</p>
+
+<p>escodegen takes as input a Spider Monkey Parser API AST and returns as output a string of executable JavaScript. As long as I can generate an AST in the format which Spider Monkey Parser expects then I can use escodegen to make executable JavaScript.</p>
+
+<h2>.libraries used</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API">Spider Monker Parser API</a></li>
+  <li><a href="https://github.com/Constellation/escodegen">escodegen</a></li>
+  <li><a href="https://constellation.github.io/escodegen/demo/index.html">escodegen demo</a></li>
+  <li><a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">Pratt Parser</a></li>
+  <li><a href="https://github.com/breckinloggins/bantam-coffee">Pratt Parser in Coffeescript</a></li>
+</ul>
+
+<h2>.some useful links</h2>
+
+<p>These aren't all on transpilers, some are libraries I used in order to make things work or I found cool.</p>
+
+<ul>
+  <li><a href="https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js">List of languages which compile to JS</a></li>
+  <li><a href="http://javascript.crockford.com/tdop/tdop.html">Documentation on TDOP and Pratt Parsers</a></li>
+  <li><a href="http://www.musictheory.net/">Great music theory site</a></li>
+  <li><a href="https://github.com/0xfe/vextab">VexTab, music notation at its best</a></li>
+  <li><a href="http://danieltemkin.com/Velato">Velato!</a></li>
+</ul>
