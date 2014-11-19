@@ -45,11 +45,11 @@ image: /images/velato.jpg
   }
 </script>
 
-<p>Velato is an esoteric programming language based on principles of music theory. I wasn't able to use the .NET compiler to try out the language so I made velato.js, a transpiler which takes in Velato code and spits out JavaScript. In the process I learned a bit about transpilers and language design.</p>
+<p><a href="http://esolangs.org/wiki/velato">Velato</a> is an <a href="http://esolangs.org/wiki/Esoteric_programming_language">esoteric programming language</a> based on principles of music theory. I wasn't able to use the .NET compiler to try out the language so I made velato.js, a transpiler which takes in Velato code and spits out JavaScript. In the process I learned a bit about transpilers and language design.</p>
 
 <h2>.try programming velato</h2>
 
-<p>The editor below takes input as VexTab notation and executes the notes using velato.js, the output is shown below the editor.
+<p>The editor below takes input as <a href="http://www.vexflow.com/vextab/">VexTab</a> notation and executes the notes using velato.js, the output is shown below the editor.
   <ul>
     <li><a href="http://danieltemkin.com/Velato#commandList">Velato Syntax</a></li>
     <li><a href="http://www.vexflow.com/vextab/tutorial.html">VexTab Syntax</a></li>
@@ -72,9 +72,13 @@ notes (D#/4.G/4)
 
 <h2>.building my first transpiler</h2>
 
-<p>At first I thought building something which could execute the code of an esoteric language would be a fun waste of time and I was correct. The odd thing is that after building a transpiler for Velato to JavaScript I learned valuable skills I can use in my work. For instance, I learned how trivial it is to build my own language on top of JavaScript which is something I thought was impossible. After a few experiences with Jison I figured I could never make something which parses a custom language and generates JavaScript.</p>
+<p>At first I thought building something which could execute the code of an esoteric language would be a fun waste of time</p>
 
-<p>I think that building velato.js enlightened me on language features which I have never considered before. In Velato, there is an idea of changing the root note which in turn changes how notes are parsed. For example, the command to print might be {% highlight ruby %}C A G{% endhighlight %} in the root of C but if I change the root note to be F then the command becomes:{% highlight ruby %}F D C{% endhighlight %}</p>
+<p>And I was correct.</p> 
+
+<p>However(!), the odd thing is that after building a transpiler for Velato to JavaScript I learned valuable skills I can use in my work. For instance, I learned how trivial it is to build my own language on top of JavaScript which is something I thought was impossible. After a few experiences with <a href="http://zaach.github.io/jison/">Jison</a> I figured I could never make something which parses a custom language and generates JavaScript.</p>
+
+<p>Building velato.js has enlightened me on language features which I have never considered before. In Velato, there is an idea of changing the root note which in turn changes how notes are parsed. For example, the command to print might be {% highlight ruby %}C A G{% endhighlight %} in the root of C but if I change the root note to be F then the command becomes:{% highlight ruby %}F D C{% endhighlight %}</p>
 
 <p>A language where every line might change the meaning of the next line is a concept which I had never imagined in programming. Sure, a variable might change what it points to but the actual syntax of the code I write changing as the program is written is a novel idea to me. It can be useful in how the context of a command might change the actual syntax of that command.</p>
 
@@ -82,7 +86,7 @@ notes (D#/4.G/4)
 
 <p>Overview:
   <ol>
-    <li>Raw Velato code is input <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L601">"C A G"</a></li>
+    <li>Raw Velato code is input, e.g. <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L601">"C A G"</a></li>
     <li>String is tokenized to individual characters <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/lexer.coffee#L2">["C", "A", "G"]</a></li>
     <li>Characters are matched against either a <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L429">command or an expression</a></li>
     <li>The matched command or expression is buffered as the <a href="https://github.com/eerwitt/velato-js/blob/fac8464ceed8ef5cb5f13c9aa85fc9267e856cb1/velato/parser.coffee#L100">next match</a></li>
@@ -96,7 +100,7 @@ notes (D#/4.G/4)
 
 <p>When the Lexer returns a statement (Velato command or expression) the parser attempts to find a parselet which is responsible for a statement of that name. If a statement is found then the statement tries to parse the next statement, this is where the recursion begins matching the rest of the language. As long as each token matches to a statement then the process continues until the end of the source file.</p>
 
-<p>The statemnts being matched are returned as Abstract Syntax Tree nodes (AST nodes). I used the Spider Monkey Parser API AST node syntax as the representation for each statment. At this point the entire AST can be viewed to check for operator precedence. I used the escodegen demo to compare the AST generated with the one generated using plain JavaScript.</p>
+<p>The statements being matched are returned as Abstract Syntax Tree nodes (AST nodes). I used the Spider Monkey Parser API AST node syntax as the representation for each statment. At this point the entire AST can be viewed to check for operator precedence. I used the escodegen demo to compare the AST generated with the one generated using plain JavaScript.</p>
 
 <p>escodegen takes as input a Spider Monkey Parser API AST and returns as output a string of executable JavaScript. As long as I can generate an AST in the format which Spider Monkey Parser expects then I can use escodegen to make executable JavaScript.</p>
 
